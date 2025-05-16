@@ -1,3 +1,10 @@
+var __require = /* @__PURE__ */ ((x) => typeof require !== "undefined" ? require : typeof Proxy !== "undefined" ? new Proxy(x, {
+  get: (a, b) => (typeof require !== "undefined" ? require : a)[b]
+}) : x)(function(x) {
+  if (typeof require !== "undefined") return require.apply(this, arguments);
+  throw Error('Dynamic require of "' + x + '" is not supported');
+});
+
 // server/index.ts
 import express2 from "express";
 
@@ -488,10 +495,10 @@ function log(message, source = "express") {
   });
   console.log(`${formattedTime} [${source}] ${message}`);
 }
-async function setupVite(app2, server) {
+async function setupVite(app2, server2) {
   const serverOptions = {
     middlewareMode: true,
-    hmr: { server },
+    hmr: { server: server2 },
     allowedHosts: true
   };
   const vite = await createViteServer({
@@ -1181,7 +1188,8 @@ app.use((req, res, next) => {
   });
   next();
 });
-(async () => {
+var server;
+var initApp = async () => {
   log(`Environment: ${process.env.NODE_ENV || "development"}`);
   log(`RSS Feed configured: ${!!process.env.RSS_FEED_URL}`);
   try {
@@ -1190,7 +1198,7 @@ app.use((req, res, next) => {
   } catch (error) {
     log("Error during initial blog sync:", error.message);
   }
-  const server = await registerRoutes(app);
+  server = await registerRoutes(app);
   app.use((err, _req, res, _next) => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || "Internal Server Error";
@@ -1219,12 +1227,22 @@ app.use((req, res, next) => {
   } else {
     serveStatic(app);
   }
-  const port = 5e3;
-  server.listen({
-    port,
-    host: "0.0.0.0",
-    reusePort: true
-  }, () => {
-    log(`serving on port ${port}`);
-  });
-})();
+  return app;
+};
+if (__require.main === module) {
+  (async () => {
+    await initApp();
+    const port = 5e3;
+    server.listen({
+      port,
+      host: "0.0.0.0",
+      reusePort: true
+    }, () => {
+      log(`serving on port ${port}`);
+    });
+  })();
+}
+var index_default = initApp();
+export {
+  index_default as default
+};
