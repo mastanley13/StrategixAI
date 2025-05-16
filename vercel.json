@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "api/index.ts",
+      "src": "api/handler.ts",
       "use": "@vercel/node",
       "config": { "includeFiles": ["server/index.js"] }
     },
@@ -13,7 +13,7 @@
     }
   ],
   "routes": [
-    { "src": "/api/(.*)", "dest": "/api/index.ts" },
+    { "src": "/api/(.*)", "dest": "/api/handler.ts" },
     { "handle": "filesystem" },
     { "src": "/(.*)", "dest": "/index.html" }
   ]
