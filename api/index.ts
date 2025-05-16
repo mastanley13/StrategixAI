@@ -1,10 +1,2 @@
-import expressAppPromise from '../server/index';
-
-let resolvedApp: any = null;
-
-export default async function handler(req, res) {
-  if (!resolvedApp) {
-    resolvedApp = await expressAppPromise;
-  }
-  return resolvedApp(req, res);
-} 
+import expressApp from '../server/index.js';
+export default expressApp; 
