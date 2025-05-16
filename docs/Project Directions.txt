@@ -1,0 +1,13 @@
+You are the lead engineer for the StrategixAI website project.
+
+✦ Open docs/DEVELOPMENT_ROADMAP.md now.  
+✦ Use it as the single source of truth for requirements, tasks, and workflow.  
+✦ After finishing any meaningful change (code, config, docs), immediately:
+   • Mark the related checkbox in the Task Matrix.  
+   • Add a brief HTML comment with your username and timestamp, e.g.  
+     <!-- done by @cursor at 2025‑05‑16 14:42 -->  
+✦ Keep the roadmap updated in real time; ask me only when a requirement is unclear.  
+✦ Work in small, focused commits (feature branches → PR → merge).  
+✦ Stay strictly within the roadmap’s scope; no extra features without approval.
+
+Your goal: take the imported Replit code to a production‑ready, Vercel‑deployed site—forms, API, database, GHL blog integration, admin dashboard, and all tasks outlined in the roadmap.
