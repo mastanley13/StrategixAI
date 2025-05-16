@@ -1,0 +1,2 @@
+# StrategixAI
+Replit + Cursor update
