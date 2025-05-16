@@ -6,24 +6,22 @@ export default function Footer() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row justify-between items-center mb-8">
           <div className="mb-6 md:mb-0">
-            <Link href="/">
-              <a className="text-white font-display font-bold text-2xl">
-                Strategix<span className="text-accent">AI</span>
-              </a>
+            <Link href="/" className="text-white font-display font-bold text-2xl">
+              Strategix<span className="text-accent">AI</span>
             </Link>
           </div>
           <div className="flex flex-wrap gap-6">
-            <Link href="/">
-              <a className="hover:text-white transition-colors">Home</a>
+            <Link href="/" className="hover:text-white transition-colors">
+              Home
             </Link>
-            <Link href="/privacy">
-              <a className="hover:text-white transition-colors">Privacy & Security Policy</a>
+            <Link href="/privacy" className="hover:text-white transition-colors">
+              Privacy & Security Policy
             </Link>
-            <Link href="/terms">
-              <a className="hover:text-white transition-colors">Terms</a>
+            <Link href="/terms" className="hover:text-white transition-colors">
+              Terms
             </Link>
-            <Link href="/accessibility">
-              <a className="hover:text-white transition-colors">Accessibility</a>
+            <Link href="/accessibility" className="hover:text-white transition-colors">
+              Accessibility
             </Link>
           </div>
         </div>
