@@ -40,25 +40,25 @@ export default function Header() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center">
-            <Link href="/">
-              <a className="text-primary font-display font-bold text-2xl">
+            <Link href="/" className="text-primary font-display font-bold text-2xl">
                 Strategix<span className="text-accent">AI</span>
-              </a>
             </Link>
           </div>
           
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8 items-center">
             {navItems.map((item) => (
-              <Link key={item.path} href={item.path}>
-                <a className={cn(
+              <Link 
+                key={item.path} 
+                href={item.path}
+                className={cn(
                   "font-medium transition-colors",
                   location === item.path 
-                    ? "text-primary"
+                    ? "text-primary" 
                     : "text-gray-700 hover:text-primary"
-                )}>
-                  {item.name}
-                </a>
+                )}
+              >
+                {item.name}
               </Link>
             ))}
             <Link href="#book-call">
@@ -90,21 +90,24 @@ export default function Header() {
       )}>
         <div className="container mx-auto px-4 py-4 space-y-4">
           {navItems.map((item) => (
-            <Link key={item.path} href={item.path}>
-              <a className={cn(
+            <Link 
+              key={item.path} 
+              href={item.path}
+              className={cn(
                 "block font-medium",
                 location === item.path 
                   ? "text-primary"
                   : "text-gray-700 hover:text-primary"
-              )}>
-                {item.name}
-              </a>
+              )}
+            >
+              {item.name}
             </Link>
           ))}
-          <Link href="#book-call">
-            <a className="block bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg font-medium text-center transition-colors">
-              Book Call
-            </a>
+          <Link 
+            href="#book-call"
+            className="block bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg font-medium text-center transition-colors"
+          >
+            Book Call
           </Link>
         </div>
       </div>
