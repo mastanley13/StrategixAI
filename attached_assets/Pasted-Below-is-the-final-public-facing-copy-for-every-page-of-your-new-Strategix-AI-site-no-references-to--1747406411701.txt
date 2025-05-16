@@ -1,0 +1,161 @@
+Below is the final public‑facing copy for every page of your new Strategix AI site—no references to TypeScript, React, 3‑D libraries, or other build‑time frameworks appear anywhere in the text users will see.
+At the very end you’ll find a short, clearly separated note for the coding AI that specifies the build stack (TypeScript + React with optional 3 JS flourishes).
+
+⸻
+
+0. Global Metadata (visible only to search engines)
+	•	Site Title: Strategix AI – AI Consulting, Automation & Training
+	•	Meta Description (150 chars): AI consulting & custom builds that turn business bottlenecks into breakthroughs. Book a discovery call and get a 90‑day action plan in a week.
+
+⸻
+
+1. Navigation Labels
+
+Home · Solutions · Process · Results · Team · FAQ · Book Call
+
+(“Book Call” is a persistent CTA button.)
+
+⸻
+
+2. HOME PAGE
+
+HERO
+
+Turn Bottlenecks into Breakthroughs with Tailored AI Consulting
+Strategix AI uncovers your biggest process pain points, designs the right automation, and delivers working solutions—so you grow revenue and win back time without the trial‑and‑error.
+
+“Consult first, build second.” Our deep‑dive workshops map a 90‑day AI action plan; then we engineer the workflows—voice, web, or back‑office—that keep your business running while you sleep.
+
+Primary CTA – Book a 30‑minute Discovery Call
+Secondary CTAs – Download the AI Action‑Plan Sample · Join the Newsletter
+
+⸻
+
+WHY STRATEGIX AI
+
+Your Challenge	Our Edge
+AI “audits” that deliver a slide deck and no follow‑through.	We hand you a costed 90‑day Action Plan plus a prototype backlog you can start tomorrow.
+Pet‑care tools solve bookings but ignore day‑to‑day operations.	Our Dog‑Care Ops Suite unifies staff tasks, client portal, voice bots, and CRM automation in one build.
+Call‑analytics platforms analyse calls only after they’re over.	Sales Trainer coaches reps during the call and auto‑grades instantly.
+Generic voice bots stop at answering the phone.	We link voice, CRM, and marketing workflows so every interaction fuels the next sale.
+
+(Optional rotating quote carousel with three client testimonials.)
+
+⸻
+
+WHAT WE DELIVER
+
+Flagship Products
+
+Product	Status	What It Solves
+Dog‑Care Ops Suite	Launching Q3 2025	Booking, vaccination tracking, billing, staff scheduling, daily pet reports—one login for everything.
+Sales Trainer	Enterprise pilots	AI avatars simulate prospects, coach in real time, and grade calls automatically.
+AI‑Ready Websites	Live	Conversion‑optimised sites wired to workflows from day 1 (starting $1 k).
+Voice‑AI Integrations	Live	24/7 phone assistants that transact, upsell, and sync to CRM.
+
+High‑Touch Services
+
+Service	Format	Ideal Buyer
+Deep‑Dive Consulting	1‑, 3‑, or 5‑day sprint → 90‑day Action Plan	Owners · COOs · Ops VPs
+Custom Training Curricula	Role‑specific workshops + on‑demand modules	HR / L&D / Enablement
+Full‑Stack App Builds	Guided engagements from prototype to launch	SMBs → Enterprise
+
+(Button: Explore All Solutions → Solutions page)
+
+⸻
+
+3. SOLUTIONS PAGE
+
+3.1 Deep‑Dive AI Consulting
+
+Fixed‑fee, fixed‑scope discovery that surfaces high‑ROI automation targets, ranks them, and delivers a 90‑day action plan with timelines, budgets, and KPIs.
+
+3.2 Custom Training
+
+Tailored curricula (live + recorded) that cut “time‑to‑self‑sufficiency” by 40 % on average.
+
+3.3 Flagship Products
+
+Dedicated sub‑sections for Dog‑Care Suite, Sales Trainer, AI‑Ready Websites, and Voice‑AI Integrations—each with two‑sentence pain/solution summaries and a “Let’s Talk” mini‑CTA.
+
+⸻
+
+4. PROCESS PAGE
+
+Our Five‑Phase Delivery Model
+	1.	Discovery Sprint (1–5 days) – Stakeholder interviews, process mapping, ROI scoring.
+	2.	Blueprint Delivery (1 week) – 90‑day Action Plan with budget and KPI forecast.
+	3.	Build & Integrate (4–8 weeks per workstream) – Iterative sprints; everything is guided, never thrown over the wall.
+	4.	Custom Training (1–4 weeks) – Role‑based enablement with certification quizzes.
+	5.	Ongoing Support – Slack/Teams channel, 48‑hour change‑request SLA, quarterly ROI reviews.
+
+(Timeline graphic placeholder.)
+
+⸻
+
+5. RESULTS PAGE
+
+Case Study Highlights
+
+River Bend Golf & Country Club
+	•	Problem: $46 k monthly deficit.
+	•	Solution: Conversational assistant, automated marketing, task automation, staff training.
+	•	Outcome: $92 k profit in six months.
+
+Independent Mortgage Broker
+	•	Problem: Manual outreach bottleneck.
+	•	Solution: AI task dashboard + automated engagement flows.
+	•	Outcome: 200 % revenue growth and 70 % efficiency gain.
+
+(Add rotating gallery; future dog‑care beta data can slot in.)
+
+⸻
+
+6. TEAM PAGE
+
+	
+Mykel StanleyChief Executive Officer & Co‑Founder	Marine veteran, ex‑top recruiter, full‑stack developer, process‑automation strategist.
+Kieran GroganCo‑Founder & Chief Technology Officer	Marine veteran, voice‑AI specialist, architecture & security lead.
+Hunter DroutCo‑Founder & Chief Technology Officer	Applied‑AI engineer focused on seamless user experience and integration quality.
+
+Extended Network – Contract engineers, prompt writers, and designers scale per project—no bloated overhead.
+
+⸻
+
+7. FAQ PAGE
+	1.	Difference between a 1‑Day and 5‑Day Deep‑Dive?
+	2.	Do you replace our existing software?
+	3.	How fast can we be live?
+	4.	What does ongoing support include?
+	5.	Typical pricing ranges?
+
+(Use accordion component.)
+
+⸻
+
+8. GLOBAL CTA BLOCK
+
+Ready to reclaim your hours?
+Book a free 30‑minute Discovery Call and walk away with a no‑nonsense game‑plan for your top three bottlenecks—on us.
+
+Buttons: Book Call · Email · LinkedIn
+
+⸻
+
+9. FOOTER
+
+© 2025 Strategix AI, LLC · New Bern, NC – Veteran‑Owned · U.S.‑Based · Security‑First
+Links: Home · Privacy & Security Policy · Terms · Accessibility
+Social: LinkedIn | YouTube (webinar replays)
+
+⸻
+
+— End of Public Copy —
+
+⸻
+
+🔧 Builder Note *(not for publication)
+	•	Stack: Build with TypeScript + React.
+	•	Optional Visual Flair: Use 3 JS (or equivalent WebGL library) for subtle hero/background animations or interactive data‑visualisations, ensuring performance and accessibility.
+	•	Routing: SPA or Next.js static export is fine; keep nav slugs as listed.
+	•	CMS / Content source: Markdown/MDX acceptable; no dynamic CMS required unless preferred.
