@@ -1,0 +1,6 @@
+# www.strategixai.co robots.txt
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://www.strategixai.co/sitemap.xml 

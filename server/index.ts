@@ -2,10 +2,26 @@ import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import * as dotenv from "dotenv";
-import { scheduleRSSUpdates } from "./services/rss-service";
+import { syncBlogPosts } from "./services/blogSync";
 
 // Load environment variables from .env.local
 dotenv.config({ path: ".env.local" });
+
+// FORCE SET RSS_FEED_URL - this is a temporary fix
+process.env.RSS_FEED_URL = "https://rss-link.com/feed/8lQAYS7QatKYV3ENYdl1?blogId=RSSaObImCNRCNM3nndyO&limit=25&loadContent=true";
+log("Forced setting RSS_FEED_URL to Go High Level feed URL with loadContent=true");
+
+// Check for critical environment variables
+if (!process.env.RSS_FEED_URL) {
+  log("\x1b[33mWARNING: RSS_FEED_URL is not set in .env.local. Blog functionality will use mock data.\x1b[0m");
+  log("Create a .env.local file with RSS_FEED_URL=\"your-go-high-level-rss-url\" to fix this.");
+  
+  // Set a default mock URL if we're in development mode
+  if (process.env.NODE_ENV === 'development') {
+    process.env.RSS_FEED_URL = "https://example.com/mock-feed";
+    log("Mock RSS feed URL set for development.");
+  }
+}
 
 const app = express();
 app.use(express.json());
@@ -42,6 +58,18 @@ app.use((req, res, next) => {
 });
 
 (async () => {
+  // Log environment
+  log(`Environment: ${process.env.NODE_ENV || 'development'}`);
+  log(`RSS Feed configured: ${!!process.env.RSS_FEED_URL}`);
+  
+  // Load initial blog posts
+  try {
+    const result = await syncBlogPosts(true); // Force update existing posts
+    log(`Initial blog sync complete. Imported ${result.imported} posts, updated ${result.updated} posts.`);
+  } catch (error) {
+    log("Error during initial blog sync:", (error as Error).message);
+  }
+
   const server = await registerRoutes(app);
 
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
@@ -56,10 +84,20 @@ app.use((req, res, next) => {
   if (app.get("env") !== "development" || process.env.FETCH_RSS === "true") {
     try {
       // Check for RSS feed every hour (60 minutes)
-      scheduleRSSUpdates(60);
-      log("RSS feed fetching scheduled");
+      const intervalMinutes = 60;
+      const interval = intervalMinutes * 60 * 1000;
+      
+      log(`Scheduling blog sync every ${intervalMinutes} minutes`);
+      setInterval(async () => {
+        try {
+          const result = await syncBlogPosts(true); // Force update
+          log(`Scheduled blog sync complete. Imported ${result.imported} posts, updated ${result.updated} posts.`);
+        } catch (syncError) {
+          log("Error during scheduled blog sync:", (syncError as Error).message);
+        }
+      }, interval);
     } catch (error) {
-      log("Error setting up RSS feed fetching:", (error as Error).message);
+      log("Error setting up blog sync schedule:", (error as Error).message);
     }
   }
 

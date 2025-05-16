@@ -36,7 +36,7 @@ export default function CTASection() {
     setIsSubmitting(true);
     
     try {
-      await apiRequest("POST", "/api/contact", formData);
+      await apiRequest("POST", "/api/intake", formData);
       
       toast({
         title: "Success!",

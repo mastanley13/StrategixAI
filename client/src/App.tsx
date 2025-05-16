@@ -9,7 +9,8 @@ import FAQ from "@/pages/faq";
 import Admin from "@/pages/admin";
 import Blog from "@/pages/blog";
 import BlogPost from "@/pages/blog-post";
-import NotFound from "@/pages/not-found";
+import BlogDebug from "@/pages/blog-debug";
+import NotFoundPage from "@/pages/not-found";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 // Create a client
@@ -18,20 +19,59 @@ const queryClient = new QueryClient();
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <MainLayout>
-        <Switch>
-          <Route path="/" component={Home} />
-          <Route path="/solutions" component={Solutions} />
-          <Route path="/process" component={Process} />
-          <Route path="/results" component={Results} />
-          <Route path="/team" component={Team} />
-          <Route path="/faq" component={FAQ} />
-          <Route path="/blog" component={Blog} />
-          <Route path="/blog/:slug" component={BlogPost} />
-          <Route path="/admin" component={Admin} />
-          <Route component={NotFound} />
-        </Switch>
-      </MainLayout>
+      <Switch>
+        <Route path="/">
+          <MainLayout>
+            <Home />
+          </MainLayout>
+        </Route>
+        <Route path="/solutions">
+          <MainLayout>
+            <Solutions />
+          </MainLayout>
+        </Route>
+        <Route path="/process">
+          <MainLayout>
+            <Process />
+          </MainLayout>
+        </Route>
+        <Route path="/results">
+          <MainLayout>
+            <Results />
+          </MainLayout>
+        </Route>
+        <Route path="/team">
+          <MainLayout>
+            <Team />
+          </MainLayout>
+        </Route>
+        <Route path="/faq">
+          <MainLayout>
+            <FAQ />
+          </MainLayout>
+        </Route>
+        <Route path="/blog">
+          <MainLayout>
+            <Blog />
+          </MainLayout>
+        </Route>
+        <Route path="/blog/:slug">
+          <MainLayout>
+            <BlogPost />
+          </MainLayout>
+        </Route>
+        <Route path="/blog-debug">
+          <MainLayout>
+            <BlogDebug />
+          </MainLayout>
+        </Route>
+        <Route path="/admin">
+          <MainLayout>
+            <Admin />
+          </MainLayout>
+        </Route>
+        <Route component={NotFoundPage} />
+      </Switch>
     </QueryClientProvider>
   );
 }
