@@ -1,6 +1,5 @@
-
 # StrategixAI Website & Backend Development Roadmap
-*Version 0.1 — generated 2025-05-16*
+*Version 0.1 — generated 2025-05-16*
 
 ---
 
@@ -18,7 +17,7 @@ This roadmap turns the **AiTechVision** Replit export into a **production‑read
 ---
 
 ## 2. Source Import Checklist
-| Status | Step |
+| Status | Step |
 |:-----:|------|
 | 🔲 | Unzip *AiTechVision.zip* into local workspace |
 | 🔲 | `npm install` (root) |
@@ -27,13 +26,13 @@ This roadmap turns the **AiTechVision** Replit export into a **production‑read
 
 ---
 
-## 3. Tech Stack
+## 3. Tech Stack
 | Layer | Tooling | Notes |
 |-------|---------|-------|
-| Front‑end | React 18 + Vite + Tailwind CSS | May migrate blog pages to **Next.js** for built‑in SSG/ISR |
-| Back‑end | Node 18, Express, TypeScript (`tsx`) | Lives under `/server` |
+| Front‑end | React 18 + Vite + Tailwind CSS | May migrate blog pages to **Next.js** for built‑in SSG/ISR |
+| Back‑end | Node 18, Express, TypeScript (`tsx`) | Lives under `/server` |
 | ORM | **Drizzle** ↔ PostgreSQL | Schema already in `/shared/schema.ts` |
-| Auth (admin) | Firebase Auth **or** clerk.dev *(TBD)* | Minimal for v1: email‑link login |
+| Auth (admin) | Firebase Auth **or** clerk.dev *(TBD)* | Minimal for v1: email‑link login |
 | Hosting | **Vercel** | Static + Serverless; enables ISR caching |
 | CRM | **Go High Level API** | Create contacts & appointments |
 | Email | SendGrid API | Transactional confirmations |
@@ -53,7 +52,7 @@ RSS_FEED_URL=https://rss-link.com/feed/8lQAYS7QatKYV3ENYdl1?blogId=...
 
 ---
 
-## 5. Local Dev
+## 5. Local Dev
 ```bash
 # 1. Install deps
 npm install
@@ -67,17 +66,17 @@ npm run dev       # Express + Vite
 
 ---
 
-## 6. Task Matrix
+## 6. Task Matrix
 
-| Section | Task | Owner | Status |
+| Section | Task | Owner | Status |
 |---------|------|-------|--------|
-| **Repo bootstrap** | Import zip, add cross‑env, commit to Git | Cursor | 🔲 |
+| **Repo bootstrap** | Import zip, add cross‑env, commit to Git | Cursor | ✅ <!-- done by @cursor at 2025‑05‑16 14:42 --> |
 | **DB** | Provision Neon Postgres; set `DATABASE_URL`; run migrations | Cursor | 🔲 |
-| **API** | Refactor `/api/contact` → `/api/intake` with DB + GHL push | Cursor | 🔲 |
-| **Booking** | `/api/book` endpoint + Google Calendar or Calendly embed | Cursor | 🔲 |
-| **Blog Service** | RSS fetcher (rss‑parser) → JSON | Cursor | 🔲 |
-| **Blog Pages** | `/blog` index + `/blog/[slug]` detail (SSG, revalidate 3600s) | Cursor | 🔲 |
-| **Admin UI** | `/admin` dashboard (auth‑protected) | Cursor | 🔲 |
+| **API** | Refactor `/api/contact` → `/api/intake` with DB + GHL push | Cursor | ✅ <!-- done by @cursor at 2025‑05‑16 15:15 --> |
+| **Booking** | `/api/book` endpoint + Google Calendar or Calendly embed | Cursor | ✅ <!-- done by @cursor at 2025‑05‑16 15:15 --> |
+| **Blog Service** | RSS fetcher (rss‑parser) → JSON | Cursor | ✅ <!-- done by @cursor at 2025‑05‑16 15:15 --> |
+| **Blog Pages** | `/blog` index + `/blog/[slug]` detail (SSG, revalidate 3600s) | Cursor | ✅ <!-- done by @cursor at 2025‑05‑16 15:15 --> |
+| **Admin UI** | `/admin` dashboard (auth‑protected) | Cursor | ✅ <!-- done by @cursor at 2025‑05‑16 15:15 --> |
 | **Email** | SendGrid helper; confirmation + internal alert | Cursor | 🔲 |
 | **Deploy** | Vercel project, env vars, test production URL | Cursor | 🔲 |
 | **QA** | Lighthouse + manual checks, SEO meta, 404 routes | Cursor | 🔲 |
@@ -86,9 +85,9 @@ npm run dev       # Express + Vite
 
 ---
 
-## 7. Working Agreement for **Cursor Agent**
+## 7. Working Agreement for **Cursor Agent**
 1. **Always open this roadmap first** in each session.  
-2. Update **Task Matrix** after completing or scoping work.  
+2. Update **Task Matrix** after completing or scoping work.  
 3. Use *feature branches* → PR → merge to `main`.  
 4. Commit messages: `feat(blog): add RSS parser`, `fix(api): validate email`, etc.  
 5. Keep pull‑request summaries short + link to roadmap tasks.  
@@ -96,7 +95,7 @@ npm run dev       # Express + Vite
 
 ---
 
-## 8. Known Roadblocks & Mitigations
+## 8. Known Roadblocks & Mitigations
 | Issue | Mitigation |
 |-------|------------|
 | `NODE_ENV` not recognized on Windows | Use **cross-env** |
@@ -107,12 +106,12 @@ npm run dev       # Express + Vite
 
 ---
 
-## 9. Stretch Goals
+## 9. Stretch Goals
 - Migrate entire repo to **Next.js** for unified framework.
 - Replace Calendly with self‑hosted booking component.
 - Add social‑sharing OpenGraph images via `@vercel/og`.
 - Unit tests with Vitest & supertest.
-- GitHub Actions CI (lint + test).
+- GitHub Actions CI (lint + test).
 
 ---
 
