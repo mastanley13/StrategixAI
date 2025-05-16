@@ -115,6 +115,23 @@ const NavigationMenuIndicator = React.forwardRef<
 NavigationMenuIndicator.displayName =
   NavigationMenuPrimitive.Indicator.displayName
 
+// Blog link component for easy reuse
+const BlogLink = React.forwardRef<HTMLAnchorElement, React.ComponentPropsWithoutRef<typeof NavigationMenuLink>>(
+  (props, ref) => (
+    <NavigationMenuItem>
+      <NavigationMenuLink
+        ref={ref}
+        className={navigationMenuTriggerStyle()}
+        href="/blog"
+        {...props}
+      >
+        Blog
+      </NavigationMenuLink>
+    </NavigationMenuItem>
+  )
+)
+BlogLink.displayName = "BlogLink"
+
 export {
   navigationMenuTriggerStyle,
   NavigationMenu,
@@ -125,4 +142,5 @@ export {
   NavigationMenuLink,
   NavigationMenuIndicator,
   NavigationMenuViewport,
+  BlogLink,
 }

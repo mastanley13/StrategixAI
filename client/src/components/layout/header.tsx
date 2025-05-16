@@ -28,6 +28,7 @@ export default function Header() {
     { name: "Solutions", path: "/solutions" },
     { name: "Process", path: "/process" },
     { name: "Results", path: "/results" },
+    { name: "Blog", path: "/blog" },
     { name: "Team", path: "/team" },
     { name: "FAQ", path: "/faq" },
   ];
