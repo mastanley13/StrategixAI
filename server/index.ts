@@ -1,6 +1,11 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+import * as dotenv from "dotenv";
+import { scheduleRSSUpdates } from "./services/rss-service";
+
+// Load environment variables from .env.local
+dotenv.config({ path: ".env.local" });
 
 const app = express();
 app.use(express.json());
@@ -46,6 +51,17 @@ app.use((req, res, next) => {
     res.status(status).json({ message });
     throw err;
   });
+
+  // Set up RSS feed fetching (if in production)
+  if (app.get("env") !== "development" || process.env.FETCH_RSS === "true") {
+    try {
+      // Check for RSS feed every hour (60 minutes)
+      scheduleRSSUpdates(60);
+      log("RSS feed fetching scheduled");
+    } catch (error) {
+      log("Error setting up RSS feed fetching:", (error as Error).message);
+    }
+  }
 
   // importantly only setup vite in development and after
   // setting up all the other routes so the catch-all route
