@@ -285,7 +285,7 @@ export class DrizzleStorage implements IStorage {
   
   async updateBlogPost(id: number, blogPost: Partial<Omit<BlogPost, 'id'>>): Promise<BlogPost | undefined> {
     const result = await db.update(blogPosts)
-      .set({ ...blogPost, updatedAt: new Date() })
+      .set({ ...blogPost, lastFetched: new Date() })
       .where(eq(blogPosts.id, id))
       .returning();
     return result[0];
