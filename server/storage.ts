@@ -1,8 +1,8 @@
 import { drizzle } from 'drizzle-orm/neon-http';
 import { neon } from '@neondatabase/serverless';
-import { users, contacts, bookings, blogPosts } from '../shared/schema';
+import { users, contacts, bookings } from '../shared/schema';
 import { eq } from 'drizzle-orm';
-import type { User, InsertUser, Contact, InsertContact, Booking, InsertBooking, BlogPost } from '../shared/schema';
+import type { User, InsertUser, Contact, InsertContact, Booking, InsertBooking } from '../shared/schema';
 
 // Check if we're in development mode
 const isDev = process.env.NODE_ENV === 'development';
@@ -38,13 +38,6 @@ export interface IStorage {
   createBooking(booking: InsertBooking): Promise<Booking>;
   updateBooking(id: number, booking: Partial<InsertBooking>): Promise<Booking | undefined>;
   
-  // Blog post methods
-  getBlogPost(id: number): Promise<BlogPost | undefined>;
-  getBlogPostBySlug(slug: string): Promise<BlogPost | undefined>;
-  listBlogPosts(): Promise<BlogPost[]>;
-  createBlogPost(blogPost: Omit<BlogPost, 'id'>): Promise<BlogPost>;
-  updateBlogPost(id: number, blogPost: Partial<Omit<BlogPost, 'id'>>): Promise<BlogPost | undefined>;
-  deleteBlogPost(id: number): Promise<boolean>;
 
   /**
    * Get a contact by ID
@@ -59,11 +52,9 @@ export class MockStorage implements IStorage {
   private users: Map<number, User> = new Map();
   private contacts: Map<number, Contact> = new Map();
   private bookings: Map<number, Booking> = new Map();
-  private blogPosts: Map<number, BlogPost> = new Map();
   private userCounter = 1;
   private contactCounter = 1;
   private bookingCounter = 1;
-  private blogPostCounter = 1;
 
   // User methods
   async getUser(id: number): Promise<User | undefined> {
@@ -155,39 +146,6 @@ export class MockStorage implements IStorage {
     return updatedBooking;
   }
   
-  // Blog post methods
-  async getBlogPost(id: number): Promise<BlogPost | undefined> {
-    return this.blogPosts.get(id);
-  }
-  
-  async getBlogPostBySlug(slug: string): Promise<BlogPost | undefined> {
-    return Array.from(this.blogPosts.values()).find(post => post.slug === slug);
-  }
-  
-  async listBlogPosts(): Promise<BlogPost[]> {
-    return Array.from(this.blogPosts.values());
-  }
-  
-  async createBlogPost(blogPost: Omit<BlogPost, 'id'>): Promise<BlogPost> {
-    const id = this.blogPostCounter++;
-    const newBlogPost = { ...blogPost, id } as BlogPost;
-    this.blogPosts.set(id, newBlogPost);
-    return newBlogPost;
-  }
-  
-  async updateBlogPost(id: number, blogPost: Partial<Omit<BlogPost, 'id'>>): Promise<BlogPost | undefined> {
-    const existingBlogPost = this.blogPosts.get(id);
-    if (!existingBlogPost) return undefined;
-    
-    const updatedBlogPost = { ...existingBlogPost, ...blogPost, lastFetched: new Date() };
-    this.blogPosts.set(id, updatedBlogPost);
-    return updatedBlogPost;
-  }
-
-  async deleteBlogPost(id: number): Promise<boolean> {
-    if (!this.blogPosts.has(id)) return false;
-    return this.blogPosts.delete(id);
-  }
 
   /**
    * Get a contact by ID
@@ -263,45 +221,6 @@ export class DrizzleStorage implements IStorage {
     return result[0];
   }
   
-  // Blog post methods
-  async getBlogPost(id: number): Promise<BlogPost | undefined> {
-    const result = await db.select().from(blogPosts).where(eq(blogPosts.id, id)).limit(1);
-    return result[0];
-  }
-  
-  async getBlogPostBySlug(slug: string): Promise<BlogPost | undefined> {
-    const result = await db.select().from(blogPosts).where(eq(blogPosts.slug, slug)).limit(1);
-    return result[0];
-  }
-  
-  async listBlogPosts(): Promise<BlogPost[]> {
-    return await db.select().from(blogPosts).orderBy(blogPosts.publishedAt);
-  }
-  
-  async createBlogPost(blogPost: Omit<BlogPost, 'id'>): Promise<BlogPost> {
-    const result = await db.insert(blogPosts).values(blogPost).returning();
-    return result[0];
-  }
-  
-  async updateBlogPost(id: number, blogPost: Partial<Omit<BlogPost, 'id'>>): Promise<BlogPost | undefined> {
-    const result = await db.update(blogPosts)
-      .set({ ...blogPost, updatedAt: new Date() })
-      .where(eq(blogPosts.id, id))
-      .returning();
-    return result[0];
-  }
-
-  async deleteBlogPost(id: number): Promise<boolean> {
-    try {
-      const result = await db.delete(blogPosts)
-        .where(eq(blogPosts.id, id))
-        .returning();
-      return result.length > 0;
-    } catch (error) {
-      console.error(`Error deleting blog post ${id}:`, error);
-      return false;
-    }
-  }
 
   /**
    * Get a contact by ID

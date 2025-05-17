@@ -34,19 +34,6 @@ export const bookings = pgTable("bookings", {
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });
 
-export const blogPosts = pgTable("blog_posts", {
-  id: serial("id").primaryKey(),
-  ghlId: text("ghl_id").notNull().unique(),
-  title: text("title").notNull(),
-  slug: text("slug").notNull().unique(),
-  content: text("content").notNull(),
-  excerpt: text("excerpt"),
-  author: text("author"),
-  publishedAt: timestamp("published_at"),
-  imageUrl: text("image_url"),
-  tags: jsonb("tags"),
-  lastFetched: timestamp("last_fetched").notNull().defaultNow(),
-});
 
 // Schema validation for inserts
 export const insertUserSchema = createInsertSchema(users).pick({
@@ -79,4 +66,3 @@ export type Contact = typeof contacts.$inferSelect;
 export type InsertBooking = z.infer<typeof insertBookingSchema>;
 export type Booking = typeof bookings.$inferSelect;
 
-export type BlogPost = typeof blogPosts.$inferSelect;

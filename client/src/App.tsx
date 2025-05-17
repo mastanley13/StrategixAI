@@ -7,9 +7,6 @@ import Results from "@/pages/results";
 import Team from "@/pages/team";
 import FAQ from "@/pages/faq";
 import Admin from "@/pages/admin";
-import Blog from "@/pages/blog";
-import BlogPost from "@/pages/blog-post";
-import BlogDebug from "@/pages/blog-debug";
 import NotFoundPage from "@/pages/not-found";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
@@ -48,21 +45,6 @@ function App() {
         <Route path="/faq">
           <MainLayout>
             <FAQ />
-          </MainLayout>
-        </Route>
-        <Route path="/blog">
-          <MainLayout>
-            <Blog />
-          </MainLayout>
-        </Route>
-        <Route path="/blog/:slug">
-          <MainLayout>
-            <BlogPost />
-          </MainLayout>
-        </Route>
-        <Route path="/blog-debug">
-          <MainLayout>
-            <BlogDebug />
           </MainLayout>
         </Route>
         <Route path="/admin">
