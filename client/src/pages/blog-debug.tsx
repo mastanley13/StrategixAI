@@ -168,7 +168,7 @@ function SyncBlogPosts() {
   const [syncResult, setSyncResult] = useState<{imported: number} | null>(null);
   const [syncLoading, setSyncLoading] = useState(false);
   const [syncError, setSyncError] = useState<string | null>(null);
-  const [summary, setSummary] = useState<{count: number; titles: string[]} | null>(null);
+  const [summary, setSummary] = useState<{count: number; titles: string[]; ids: number[]} | null>(null);
   const [summaryLoading, setSummaryLoading] = useState(false);
   
   const handleSync = async () => {
@@ -282,10 +282,11 @@ function SyncBlogPosts() {
                     <span>{title}</span>
                     <button
                       onClick={() => {
-                        // Get the actual post ID from the fetch posts response
-                        const postId = index + 1; // Placeholder - this should come from API
-                        handleDelete(postId);
-                      }} 
+                        const postId = summary.ids[index];
+                        if (postId !== undefined) {
+                          handleDelete(postId);
+                        }
+                      }}
                       className="text-red-600 hover:text-red-800 text-sm ml-4"
                     >
                       Delete
