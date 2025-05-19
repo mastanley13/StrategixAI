@@ -57,10 +57,10 @@ app.use((req, res, next) => {
   next();
 });
 
-// Initialize server and routes
+// Initialize server
 let server: any;
 
-// Initialize the server and register routes
+// Initialize the app with all routes and middleware
 const initApp = async () => {
   // Log environment
   log(`Environment: ${process.env.NODE_ENV || 'development'}`);
@@ -117,10 +117,13 @@ const initApp = async () => {
   return app;
 };
 
-// For direct execution (not imported)
-if (require.main === module) {
+// Initialize the app
+const appPromise = initApp();
+
+// Only listen locally if not on Vercel
+if (!process.env.VERCEL) {
   (async () => {
-    await initApp();
+    const initializedApp = await appPromise;
     // ALWAYS serve the app on port 5000
     // this serves both the API and the client.
     // It is the only port that is not firewalled.
@@ -135,5 +138,5 @@ if (require.main === module) {
   })();
 }
 
-// For Vercel and import usage
-export default initApp();
+// Export the app for Vercel
+export default appPromise;
