@@ -8,8 +8,8 @@ import { syncBlogPosts } from "./services/blogSync";
 dotenv.config({ path: ".env.local" });
 
 // FORCE SET RSS_FEED_URL - this is a temporary fix
-process.env.RSS_FEED_URL = "https://rss-link.com/feed/8lQAYS7QatKYV3ENYdl1?blogId=RSSaObImCNRCNM3nndyO&limit=25&loadContent=true";
-log("Forced setting RSS_FEED_URL to Go High Level feed URL with loadContent=true");
+// process.env.RSS_FEED_URL = "https://rss-link.com/feed/8lQAYS7QatKYV3ENYdl1?blogId=RSSaObImCNRCNM3nndyO&limit=25&loadContent=true";
+// log("Forced setting RSS_FEED_URL to Go High Level feed URL with loadContent=true");
 
 // Check for critical environment variables
 if (!process.env.RSS_FEED_URL) {
@@ -80,8 +80,12 @@ const initApp = async () => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || "Internal Server Error";
 
-    res.status(status).json({ message });
-    throw err;
+    // Log the error internally here if not already logged
+    console.error("Global error handler caught:", err);
+
+    res.status(status).json({ message, error: String(err) }); // Send JSON response
+    // Do not re-throw the error, as Vercel might serve an HTML page instead
+    // throw err;
   });
 
   // Set up RSS feed fetching (if in production)

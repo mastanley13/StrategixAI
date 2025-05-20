@@ -129,94 +129,87 @@ export default function BlogPage() {
   }
   
   return (
-    <div className="container mx-auto p-8">
-      <div className="mb-10">
-        <h1 className="text-4xl font-bold">Our Blog</h1>
-        <p className="text-gray-600 mt-2">
-          Insights and updates from the Strategix AI team
-        </p>
-      </div>
-      
-      {posts && posts.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {posts.map((post) => (
-            <div key={post.id} className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col h-full transition-all hover:shadow-lg hover:-translate-y-1">
-              {post.imageUrl ? (
-                <div className="h-48 overflow-hidden">
-                  <img 
-                    src={post.imageUrl} 
-                    alt={post.title} 
-                    className="w-full h-full object-cover transition-transform hover:scale-105"
-                  />
-                </div>
-              ) : (
-                <div className="h-48 bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white">
-                  <span className="text-xl font-bold">StrategixAI</span>
-                </div>
-              )}
-              
-              <div className="p-5 flex-grow flex flex-col">
-                <div className="flex items-center text-sm text-gray-500 mb-2">
-                  <time dateTime={post.publishedAt}>
+    <section className="relative overflow-hidden py-16">
+      <div className="absolute inset-0 animate-gradient bg-gradient-to-r from-blue-200 via-purple-200 to-pink-200"></div>
+      <div className="relative container mx-auto px-4 space-y-8">
+        <div className="mb-10">
+          <h1 className="text-4xl font-bold">Our Blog</h1>
+          <p className="text-lg text-gray-600 mt-2">
+            Insights and updates from the Strategix AI team
+          </p>
+        </div>
+        
+        {posts && posts.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {posts.map((post) => (
+              <div key={post.id} className="bg-white rounded-xl shadow-md overflow-hidden">
+                {post.imageUrl ? (
+                  <div className="h-48 overflow-hidden">
+                    <img 
+                      src={post.imageUrl} 
+                      alt={post.title} 
+                      className="w-full h-48 object-cover"
+                    />
+                  </div>
+                ) : (
+                  <div className="h-48 bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white">
+                    <span className="text-xl font-bold">StrategixAI</span>
+                  </div>
+                )}
+                
+                <div className="p-6">
+                  <h2 className="text-2xl font-semibold mb-2 hover:text-blue-600 transition">
+                    <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+                  </h2>
+                  
+                  <p className="text-sm text-gray-500 mb-4">
                     {new Date(post.publishedAt).toLocaleDateString('en-US', {
                       year: 'numeric',
                       month: 'short',
                       day: 'numeric'
-                    })}
-                  </time>
-                  {post.author && (
-                    <span className="ml-2">
-                      • by {post.author}
-                    </span>
+                    })} • by {post.author}
+                  </p>
+                  
+                  <p className="text-gray-700">{post.excerpt}</p>
+                  
+                  {post.tags && post.tags.length > 0 && (
+                    <div className="flex flex-wrap gap-2 mt-4 mb-4">
+                      {post.tags.slice(0, 3).map((tag, index) => (
+                        <span 
+                          key={index} 
+                          className="bg-blue-50 text-blue-700 px-2 py-1 rounded-full text-xs"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                      {post.tags.length > 3 && (
+                        <span className="text-xs text-gray-500">+{post.tags.length - 3} more</span>
+                      )}
+                    </div>
                   )}
+                  
+                  <Link 
+                    href={`/blog/${post.slug}`} 
+                    className="mt-4 inline-block text-blue-600 hover:underline"
+                  >
+                    Read More →
+                  </Link>
                 </div>
-                
-                <h2 className="text-xl font-bold mb-3 hover:text-blue-600">
-                  <Link href={`/blog/${post.slug}`}>{post.title}</Link>
-                </h2>
-                
-                <p className="text-gray-600 mb-4 line-clamp-3 flex-grow">{post.excerpt}</p>
-                
-                {post.tags && post.tags.length > 0 && (
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {post.tags.slice(0, 3).map((tag, index) => (
-                      <span 
-                        key={index} 
-                        className="bg-blue-50 text-blue-700 px-2 py-1 rounded-full text-xs"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                    {post.tags.length > 3 && (
-                      <span className="text-xs text-gray-500">+{post.tags.length - 3} more</span>
-                    )}
-                  </div>
-                )}
-                
-                <Link 
-                  href={`/blog/${post.slug}`} 
-                  className="text-blue-600 hover:underline flex items-center mt-auto"
-                >
-                  Read More 
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
-                </Link>
               </div>
-            </div>
-          ))}
-        </div>
-      ) : (
-        <div className="text-center py-12 bg-white rounded-lg shadow-md">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 mx-auto text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
-          </svg>
-          <p className="text-xl text-gray-600 mb-4">No blog posts found</p>
-          <p className="text-gray-500 mb-6 max-w-lg mx-auto">
-            We couldn't find any blog posts. This could be because the RSS feed is not properly configured or there are no published posts.
-          </p>
-        </div>
-      )}
-    </div>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-12 bg-white rounded-lg shadow-md">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 mx-auto text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+            </svg>
+            <p className="text-xl text-gray-600 mb-4">No blog posts found</p>
+            <p className="text-gray-500 mb-6 max-w-lg mx-auto">
+              We couldn't find any blog posts. This could be because the RSS feed is not properly configured or there are no published posts.
+            </p>
+          </div>
+        )}
+      </div>
+    </section>
   );
 } 

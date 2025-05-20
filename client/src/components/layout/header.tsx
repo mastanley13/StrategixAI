@@ -30,6 +30,7 @@ export default function Header() {
     { name: "Results", path: "/results" },
     { name: "Team", path: "/team" },
     { name: "FAQ", path: "/faq" },
+    { name: "Blog", path: "/blog" },
   ];
 
   return (
